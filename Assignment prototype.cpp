@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int initial state[3][3] = {8,1,2,3,4,5,6,7,0};
-int final state[3][3] = {0,1,2,3,4,5,6,7,8};
+int initial_state[3][3] = {8,1,2,3,4,5,6,7,0};
+int final_state[3][3] = {0,1,2,3,4,5,6,7,8};
 
 int C_cost;
 
@@ -15,7 +15,7 @@ void check_C_cost()
     {
         for (int j = 0; j < 3; j++)
         {
-            if (initial state[i][j] != final state[i][j])
+            if (initial_state[i][j] != final_state[i][j])
                 cost++;
         }
     }
@@ -27,22 +27,22 @@ int checkcost(int x, int y, int i, int j)
 {
     int cost = 0;
 
-    int temp = initial state[x][y];
-    initial state[x][y] = initial state[i][j];
-    initial state[i][j] = temp;
+    int temp = initial_state[x][y];
+    initial_state[x][y] = initial_state[i][j];
+    initial_state[i][j] = temp;
 
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            if (initial state[i][j] != final state[i][j])
+            if (initial_state[i][j] != final_state[i][j])
                 cost++;
         }
     }
 
-    temp = initial state[x][y];
-    initial state[x][y] = initial state[i][j];
-    initial state[i][j] = temp;
+    temp = initial_state[x][y];
+    initial_state[x][y] = initial_state[i][j];
+    initial_state[i][j] = temp;
 
     return cost;
 }
@@ -55,7 +55,7 @@ void move()
     {
         for (int j = 0; j < 3; j++)
         {
-            if (initial state[i][j] == 0)  //Move. //if min > current min do not make move
+            if (initial_state[i][j] == 0)  //Move. //if min > current min do not make move
             {
                 if (i == 1 && j == 1)     //Move of center
                 {
@@ -69,23 +69,23 @@ void move()
                    if (checkcost(i, j-1, i,j) >= checkcost(i, j+1, i,j) && checkcost(i, j-1, i,j) >= checkcost(i+1, j, i,j))
                    {
                        cout<<"Left";
-                       int temp = initial state[i][j];
-                       initial state[i][j] = initial state[i][j-1];
-                       initial state[i][j-1] = temp;
+                       int temp = initial_state[i][j];
+                       initial_state[i][j] = initial_state[i][j-1];
+                       initial_state[i][j-1] = temp;
                    }
                    else if (checkcost(i, j+1, i,j) >= checkcost(i, j-1, i,j) && checkcost(i, j+1, i,j) >= checkcost(i+1, j, i,j))
                    {
                        cout<<"Right";
-                       int temp = initial state[i][j];
-                       initial state[i][j] = initial state[i][j+1];
-                       initial state[i][j+1] = temp;
+                       int temp = initial_state[i][j];
+                       initial_state[i][j] = initial_state[i][j+1];
+                       initial_state[i][j+1] = temp;
                    }
                    else if (checkcost(i+1, j, i,j) >= checkcost(i, j-1, i,j) && checkcost(i+1, j, i,j) >= checkcost(i, j-1, i,j))
                    {
                        cout<<"Swap Down\n";
-                       int temp = initial state[i+1][j];
-                       initial state[i+1][j] = initial state[i][j];
-                       initial state[i][j] = temp;
+                       int temp = initial_state[i+1][j];
+                       initial_state[i+1][j] = initial_state[i][j];
+                       initial_state[i][j] = temp;
                    }
                 }
 
@@ -106,6 +106,7 @@ void move()
         }
     }
 }
+}
 
 int main()
 {
@@ -123,7 +124,7 @@ int main()
         for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
-        cout<<initial state[i][j]<<" ";
+        cout<<initial_state[i][j]<<" ";
         cout<<endl;
     }
         system("pause");
@@ -138,7 +139,7 @@ int main()
     /*for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
-        cout<<initial state[i][j]<<" ";
+        cout<<initial_state[i][j]<<" ";
         cout<<endl;
     }*/
 
